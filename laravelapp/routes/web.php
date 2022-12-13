@@ -25,6 +25,15 @@ Route::post('hello', 'App\Http\Controllers\HelloController@post');
 Route::get('top', 'App\Http\Controllers\HelloController@test');
 Route::post('top', 'App\Http\Controllers\HelloController@test_post');
 
+Route::get('hello/add','App\Http\Controllers\HelloController@add');
+Route::post('hello/add','App\Http\Controllers\HelloController@create');
+
+Route::get('hello/edit','App\Http\Controllers\HelloController@edit');
+Route::post('hello/edit','App\Http\Controllers\HelloController@update');
+
+Route::get('hello/del','App\Http\Controllers\HelloController@del');
+Route::post('hello/del','App\Http\Controllers\HelloController@remove');
+
 Route::get('OverView','App\Http\Controllers\HelloController@OverView');
 Route::get('Business','App\Http\Controllers\HelloController@Business');
 Route::get('Contact','App\Http\Controllers\HelloCOntroller@Contact');
