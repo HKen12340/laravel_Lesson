@@ -11,16 +11,9 @@ use Validator;
 class HelloController extends Controller
 {
   
-   public function index(Request $request)
-   {
-   if(isset($request->id)){
-      $param = ['id' => $request->id];
-      $items = DB::select('select * from people where id = :id',
-                  $param);
+   public function index(Request $request){
 
-   }else{
-      $items = DB::select('select * from people');
-   }
+   $items = DB::table('people')->orderBy('age',"asc")->get();
    return view('hello.index',['items'=>$items]);
 }
 
@@ -46,7 +39,7 @@ class HelloController extends Controller
          'mail' => $request->mail,
          'age' => $request->age,
      ];
-      DB::insert('insert into people (name, mail, age) values (:name, :mail, :age)', $param);
+      DB::table('people')->insert($param);
       return redirect('/hello');
    }
 
@@ -64,8 +57,9 @@ class HelloController extends Controller
          'mail' => $request->mail,
          'age' => $request->age,
       ];
-      DB::update('update people set name =:name,mail = :mail,
-      age = :age where id = :id', $param);
+      DB::table("people")
+      ->where("id",$request->id)
+      ->update($param);
       return redirect('/hello');
    }
 
@@ -77,8 +71,22 @@ class HelloController extends Controller
 
    public function remove(Request $request){
       $param = ['id' => $request->id];
-      DB::delete('delete from people where id = :id',$param);
+      DB::table('people')
+      ->where('id',$request->id)->delete();
       return redirect('/hello');
+   }
+
+   public function show(Request $request){
+       $page = $request->page;
+      // $min = $request->min;
+      // $max = $request->max;
+      $item = DB::table('people')
+      // ->whereRaw('age >= ? and age <=  ?',[$min,$max])
+      // ->orderBy('age','desc')
+       ->offset($page * 3)
+       ->limit(3)
+      ->get();
+      return view('hello.show',['items' => $item]);
    }
 
    public function test(){
@@ -101,4 +109,5 @@ class HelloController extends Controller
       $msg = $request->msg."さん";
       return view('test.test',['msg' => $msg]);
    }
+  
 }
