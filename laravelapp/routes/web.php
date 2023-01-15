@@ -36,6 +36,8 @@ Route::post('hello/del','App\Http\Controllers\HelloController@remove');
 
 Route::get('hello/show','App\Http\Controllers\HelloController@show');
 
+Route::get('person', 'App\Http\Controllers\PersonController@index');
+
 Route::get('OverView','App\Http\Controllers\HelloController@OverView');
 Route::get('Business','App\Http\Controllers\HelloController@Business');
 Route::get('Contact','App\Http\Controllers\HelloCOntroller@Contact');
