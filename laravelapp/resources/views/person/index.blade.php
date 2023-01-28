@@ -1,4 +1,4 @@
-@extends('layout.helloapp')
+@extends('layouts.helloapp')
 
 @section('title','Person.index')
 
@@ -9,11 +9,11 @@
 
 @section('content')
   <table>
-    <tr><th>Name</th><th>Mali</th><th>Age</th></tr>
+    <tr><th>User</th></tr>
     @foreach ($items as $item)
-        <td>{{ $item->name }}</td>
-        <td>{{ $item->mail }}</td>
-        <td>{{ $item->age }}</td>
+      <tr>
+        <td>{{ $item->getData() }}</td>
+      </tr>
     @endforeach
   </table>
 @endsection
