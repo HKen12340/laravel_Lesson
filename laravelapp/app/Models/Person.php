@@ -24,6 +24,10 @@ class Person extends Model
         return $this->id . ':' . $this->name . ' (' . $this->age . ' )';
     }
 
+    public function boards(){
+      return $this->hasMany('App\Models\Board');
+    }
+
 //   protected static function boot()
 //   {
 //     parent::boot();
