@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -9,7 +8,7 @@ class BoardController extends Controller
 {
     public function index(Request $request)
     {
-        $item = Board::all();
+        $item = Board::with('person')->get();
         return view('board.index',['items' => $item]);
     }
 

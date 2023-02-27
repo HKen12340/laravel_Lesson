@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Providers;
-
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use Validator;
@@ -31,6 +30,8 @@ class HelloServiceProvider extends ServiceProvider
         $validator->resolver(function($translator,$data,$rules,$messages){
             return new HelloValidator($translator,$data,$rules,$messages);
         });
+
+        Paginator::useBootstrap();
         // View::composer(
         //     'hello.index','App\Http\Composers\HelloComposer'
         // );
